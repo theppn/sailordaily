@@ -1,0 +1,99 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "the_ppn@hotmail.com",
+    "longName": "Sailor Daily",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/b_none.png",
+                "name": "B_NONE",
+                "type": "png"
+            },
+            {
+                "file": "images/b_tuesday.png",
+                "name": "B_TUESDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/b_wednesday.png",
+                "name": "B_WEDNESDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/b_thursday.png",
+                "name": "B_THURSDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/b_sunday.png",
+                "name": "B_SUNDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/b_saturday.png",
+                "name": "B_SATURDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/b_monday.png",
+                "name": "B_MONDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/b_friday.png",
+                "name": "B_FRIDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/wednesday.png",
+                "name": "BG_WEDNESDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/tuesday.png",
+                "name": "BG_TUESDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/thursday.png",
+                "name": "BG_THURSDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/sunday.png",
+                "name": "BG_SUNDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/saturday.png",
+                "name": "BG_SATURDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/monday.png",
+                "name": "BG_MONDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/friday.png",
+                "name": "BG_FRIDAY",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Sailor Daily",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "1ad5df2e-1ba4-4ae0-ba10-74e962c69b87",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
