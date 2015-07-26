@@ -8,7 +8,17 @@ static TextLayer *s_date_layer;
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
 static GBitmap *s_active_connection_bitmap;
+static GBitmap *s_active_connection_bitmap0;
+static GBitmap *s_active_connection_bitmap1;
+static GBitmap *s_active_connection_bitmap2;
+static GBitmap *s_active_connection_bitmap3;
+static GBitmap *s_active_connection_bitmap4;
+static GBitmap *s_active_connection_bitmap5;
+static GBitmap *s_active_connection_bitmap6;
+static GBitmap *s_active_connection_bitmap7;
+static GBitmap *s_active_connection_bitmap8;
 static GBitmap *s_inactive_connection_bitmap;
+static int current_theme;
 
 // Battery handler
 static void handle_battery(BatteryChargeState charge_state) {  
@@ -49,7 +59,74 @@ static void update_time() {
   }  
   // Display time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);
-}  
+}
+
+// Change theme according to current theme value
+static void change_theme(bool forcechange) {
+  // Get background and active connection icon acccording to day or according to current theme settings
+  if (!forcechange) {
+    // Get a tm structure
+    time_t temp = time(NULL); 
+    struct tm *tick_time = localtime(&temp);  
+    // Create a long-lived buffer
+    char buffer3[] = "1";
+    strftime(buffer3, sizeof(buffer3), "%w", tick_time);
+    current_theme = atoi(buffer3);
+  }
+  if (current_theme == 0) {
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_SUNDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap0;
+  }
+  else if (current_theme == 1) {
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_MONDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap1;
+  }
+  else if (current_theme == 2) {
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_TUESDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap2;
+  }
+  else if (current_theme == 3) {
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_WEDNESDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap3;
+  }
+  else if (current_theme == 4) {
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_THURSDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap4;
+  }
+  else if (current_theme == 5) {
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_FRIDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap5;
+  }
+  else if (current_theme == 6) {    
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_SATURDAY);
+    s_active_connection_bitmap = s_active_connection_bitmap6;
+  }
+  else if (current_theme == 7) {    
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_CHIBI);
+    s_active_connection_bitmap = s_active_connection_bitmap7;
+  }
+  else if (current_theme == 8) {    
+    gbitmap_destroy(s_background_bitmap);
+    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_URANEP);
+    s_active_connection_bitmap = s_active_connection_bitmap8;
+  }
+  if (bluetooth_connection_service_peek()) {
+    bitmap_layer_set_bitmap(s_connection_layer, s_active_connection_bitmap);
+    bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+  }
+  else {
+    bitmap_layer_set_bitmap(s_connection_layer, s_inactive_connection_bitmap);
+    bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+  }  
+}
 
 // Date and active connection icon updater
 static void update_date() {
@@ -58,56 +135,21 @@ static void update_date() {
   struct tm *tick_time = localtime(&temp);  
   // Create a long-lived buffer
   static char buffer2[] = "Mon Feb 29";
-  static char buffer3[] = "Mon";
-  // Comparison stuff
-  char monday[] = "Mon";
-  char tuesday[] = "Tue";
-  char wednesday[] = "Wed";
-  char thursday[] = "Thu";
-  char friday[] = "Fri";
-  char saturday[] = "Sat";
-  char sunday[] = "Sun";  
-  // Get background and active connection icon acccording to day  
-  strftime(buffer3, sizeof(buffer3), "%a", tick_time);
-  if (strcmp(buffer3, monday) == 0) {
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_MONDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_MONDAY);
-  }
-  else if (strcmp(buffer3, tuesday) == 0) {
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_TUESDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_TUESDAY);
-  }
-  else if (strcmp(buffer3, wednesday) == 0) {
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_WEDNESDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_WEDNESDAY);
-  }
-  else if (strcmp(buffer3, thursday) == 0) {
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_THURSDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_THURSDAY);
-  }
-  else if (strcmp(buffer3, friday) == 0) {
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_FRIDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_FRIDAY);
-  }
-  else if (strcmp(buffer3, saturday) == 0) {    
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_SATURDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_SATURDAY);
-  }
-  else if (strcmp(buffer3, sunday) == 0) {
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_SUNDAY);
-    s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_SUNDAY);
-  }  
-  bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
-  if (bluetooth_connection_service_peek()) {
-    bitmap_layer_set_bitmap(s_connection_layer, s_active_connection_bitmap);  
-  }
-  else {
-   bitmap_layer_set_bitmap(s_connection_layer, s_inactive_connection_bitmap);  
-  }
   // Write the current date into the buffer
   strftime(buffer2, sizeof("Mon Feb 29"), "%a %b %e", tick_time);
   // Display date on the TextLayer
   text_layer_set_text(s_date_layer, buffer2);
+  // Change theme
+  change_theme(false);  
+}
+
+// Tap handler to force theme change
+static void tap_handler(AccelAxisType axis, int32_t direction) {
+  current_theme++;
+  if (current_theme > 8) {
+    current_theme = 0;  
+  }
+  change_theme(true);
 }
 
 // Tick handler with multiplexer MINUTE_UNIT - DAY_UNIT
@@ -123,7 +165,6 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 // Main window loader
 static void main_window_load(Window *window) {
   // Create GBitmap, then set to created BitmapLayer
-  s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_MONDAY);
   s_background_layer = bitmap_layer_create(GRect(0, 54, 144, 114));
   bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
@@ -152,8 +193,7 @@ static void main_window_load(Window *window) {
   handle_battery(battery_state_service_peek());
   
   // Create connection BitmapLayer
-  s_active_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_MONDAY);
-  s_inactive_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_NONE);
+  s_active_connection_bitmap = s_active_connection_bitmap1;
   s_connection_layer = bitmap_layer_create(GRect(0, 5, 19, 19));
   bitmap_layer_set_bitmap(s_connection_layer, s_active_connection_bitmap);  
 
@@ -168,52 +208,68 @@ static void main_window_load(Window *window) {
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_connection_layer));
 }
 static void main_window_unload(Window *window) {
-  // Destroy TextLayer
-  text_layer_destroy(s_time_layer);
-  text_layer_destroy(s_battery_layer);
-  text_layer_destroy(s_date_layer);
-  
-  // Unsubscribe to TickTimerService, Battery and Connection services
+  // Destroy GBitmap
+  gbitmap_destroy(s_active_connection_bitmap8);
+  gbitmap_destroy(s_active_connection_bitmap7);
+  gbitmap_destroy(s_active_connection_bitmap6);
+  gbitmap_destroy(s_active_connection_bitmap5);
+  gbitmap_destroy(s_active_connection_bitmap4);
+  gbitmap_destroy(s_active_connection_bitmap3);
+  gbitmap_destroy(s_active_connection_bitmap2);
+  gbitmap_destroy(s_active_connection_bitmap1);
+  gbitmap_destroy(s_active_connection_bitmap0);
+  gbitmap_destroy(s_inactive_connection_bitmap);
+  gbitmap_destroy(s_background_bitmap);
+  // Unsubscribe to TickTimerService, Accel, Battery and Connection services
   tick_timer_service_unsubscribe();
+  accel_tap_service_unsubscribe();
   battery_state_service_unsubscribe();
   bluetooth_connection_service_unsubscribe();
 }
 
 // Init
 static void init() {
+  // Loading assets
+  s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BG_MONDAY);
+  s_active_connection_bitmap0 = gbitmap_create_with_resource(RESOURCE_ID_B_SUNDAY);
+  s_active_connection_bitmap1 = gbitmap_create_with_resource(RESOURCE_ID_B_MONDAY);
+  s_active_connection_bitmap2 = gbitmap_create_with_resource(RESOURCE_ID_B_TUESDAY);
+  s_active_connection_bitmap3 = gbitmap_create_with_resource(RESOURCE_ID_B_WEDNESDAY);
+  s_active_connection_bitmap4 = gbitmap_create_with_resource(RESOURCE_ID_B_THURSDAY);
+  s_active_connection_bitmap5 = gbitmap_create_with_resource(RESOURCE_ID_B_FRIDAY);
+  s_active_connection_bitmap6 = gbitmap_create_with_resource(RESOURCE_ID_B_SATURDAY);
+  s_active_connection_bitmap7 = gbitmap_create_with_resource(RESOURCE_ID_B_CHIBI);
+  s_active_connection_bitmap8 = gbitmap_create_with_resource(RESOURCE_ID_B_URANEP);  
+  s_inactive_connection_bitmap = gbitmap_create_with_resource(RESOURCE_ID_B_NONE);  
   // Create main Window element and assign to pointer
-  s_main_window = window_create();
-  
+  s_main_window = window_create();  
   // Set handlers to manage the elements inside the Window
   window_set_window_handlers(s_main_window, (WindowHandlers) {
     .load = main_window_load,
-    .unload = main_window_unload
-  });
-  
+    .unload = main_window_unload  });  
   // Show the Window on the watch, with animated=true
-  window_stack_push(s_main_window, true);
-  
+  window_stack_push(s_main_window, true);  
+  // Register with TickTimerService, Accel, Battery and Connection services
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  accel_tap_service_subscribe(tap_handler);
+  battery_state_service_subscribe(handle_battery);
+  bluetooth_connection_service_subscribe(handle_bluetooth);  
   // Make sure the time, date and icon are displayed from the start
   update_time();
   update_date();
-  
-  // Register with TickTimerService, Battery and Connection services
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
-  battery_state_service_subscribe(handle_battery);
-  bluetooth_connection_service_subscribe(handle_bluetooth);  
 }
 
 // Deinit
 static void deinit() {
-  // Destroy Window
-  window_destroy(s_main_window);
-  // Destroy GBitmap
-  gbitmap_destroy(s_active_connection_bitmap);
-  gbitmap_destroy(s_inactive_connection_bitmap);
-  gbitmap_destroy(s_background_bitmap);
   // Destroy BitmapLayer
   bitmap_layer_destroy(s_connection_layer);
   bitmap_layer_destroy(s_background_layer);  
+  // Destroy TextLayer
+  text_layer_destroy(s_time_layer);
+  text_layer_destroy(s_battery_layer);
+  text_layer_destroy(s_date_layer); 
+  // Destroy Window
+  window_destroy(s_main_window);    
 }
 
 // Main

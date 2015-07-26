@@ -9,6 +9,26 @@
     "resources": {
         "media": [
             {
+                "file": "images/uranep.png",
+                "name": "BG_URANEP",
+                "type": "png"
+            },
+            {
+                "file": "images/b_uranep.png",
+                "name": "B_URANEP",
+                "type": "png"
+            },
+            {
+                "file": "images/chibi.png",
+                "name": "BG_CHIBI",
+                "type": "png"
+            },
+            {
+                "file": "images/b_chibi.png",
+                "name": "B_CHIBI",
+                "type": "png"
+            },
+            {
                 "file": "images/wednesday.png",
                 "name": "BG_WEDNESDAY",
                 "type": "png"
