@@ -9,6 +9,41 @@
     "resources": {
         "media": [
             {
+                "file": "images/wednesday.png",
+                "name": "BG_WEDNESDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/tuesday.png",
+                "name": "BG_TUESDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/thursday.png",
+                "name": "BG_THURSDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/sunday.png",
+                "name": "BG_SUNDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/saturday.png",
+                "name": "BG_SATURDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/monday.png",
+                "name": "BG_MONDAY",
+                "type": "png"
+            },
+            {
+                "file": "images/friday.png",
+                "name": "BG_FRIDAY",
+                "type": "png"
+            },
+            {
                 "file": "images/b_none.png",
                 "name": "B_NONE",
                 "type": "png"
@@ -46,41 +81,6 @@
             {
                 "file": "images/b_friday.png",
                 "name": "B_FRIDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/wednesday.png",
-                "name": "BG_WEDNESDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/tuesday.png",
-                "name": "BG_TUESDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/thursday.png",
-                "name": "BG_THURSDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/sunday.png",
-                "name": "BG_SUNDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/saturday.png",
-                "name": "BG_SATURDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/monday.png",
-                "name": "BG_MONDAY",
-                "type": "png"
-            },
-            {
-                "file": "images/friday.png",
-                "name": "BG_FRIDAY",
                 "type": "png"
             }
         ]
