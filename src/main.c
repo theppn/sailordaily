@@ -165,19 +165,19 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 // Main window loader
 static void main_window_load(Window *window) {
   // Create GBitmap, then set to created BitmapLayer
-  s_background_layer = bitmap_layer_create(GRect(0, 54, 144, 114));
+  s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
   bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
   layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
 
   // Create time TextLayer
   s_time_layer = text_layer_create(GRect(0, 10, 144, 44));
-  text_layer_set_background_color(s_time_layer, GColorBlack);
+  text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
   
   // Create date TextLayer
   s_date_layer = text_layer_create(GRect(0, 0, 144, 19));
-  text_layer_set_background_color(s_date_layer, GColorBlack);
+  text_layer_set_background_color(s_date_layer, GColorClear);
   text_layer_set_text_color(s_date_layer, GColorWhite);
   text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
