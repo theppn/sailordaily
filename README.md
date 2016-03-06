@@ -14,10 +14,11 @@ Each day of the week the watchface will theme itself around a Sailor Guardian:
 
 You may shake your watch to manually cycle through. The watchface will reset itself on the daily theme at midnight when the day changes or by restarting the watchface.
 
-The Sailor Guardian symbols are my own pixel art pictures.
-Background assets are heavily redrawn by hand and dithered by Atkinson algorithm versions of pictures taken from various sources. The original pictures are not mine though, feel free to write to me if you think it is an issue to include them in ressource or binary files.
+The Sailor Guardian symbols are my own pixel art pictures. Background assets are pixel art pictures inspired from various sources redrawn by hand by me. The original pictures/ideas are not mine though, feel free to write to me if you think it is an issue.
 
 Credits where it is due:
-- Naoko Takeuchi, Toei and Sakou Yukie (I don't know, google it yourself)
+- Naoko Takeuchi
+- Sakou Yukie
+- Takahashi Akira
 - Swordsouls (http://www.pixiv.net/member.php?id=512849)
- 
+- Toei
